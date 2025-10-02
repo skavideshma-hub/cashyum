@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cashyum Registration</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #e0f7fa, #fce4ec);
+      margin: 0;
+      padding: 20px;
+      color: #333;
+    }
+    header {
+      text-align: center;
+      background-color: #6a1b9a;
+      color: white;
+      padding: 20px;
+      border-radius: 10px;
+    }
+    h1, h2 {
+      margin: 0;
+    }
+    .media {
+      text-align: center;
+      margin: 30px 0;
+    }
+    video, .poster {
+      width: 80%;
+      border-radius: 10px;
+      box-shadow: 0 0 10px #aaa;
+      margin-top: 20px;
+    }
+    form {
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      max-width: 600px;
+      margin: auto;
+      box-shadow: 0 0 15px #ccc;
+    }
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+    input, select {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 5px;
+      border: 1px solid #aaa;
+    }
+    .qr {
+      width: 200px;
+      margin: 15px 0;
+      border: 2px solid #6a1b9a;
+      border-radius: 10px;
+    }
+    button {
+      background-color: #6a1b9a;
+      color: white;
+      padding: 12px 20px;
+      margin-top: 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    .success {
+      text-align: center;
+      color: green;
+      font-weight: bold;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Department of Computer Science</h1>
+    <h2>Cashyum Program Registration</h2>
+  </header>
+
+  <section class="media">
+    <video controls>
+      <source src="trailer.mp4" type="video/mp4" />
+      Your browser does not support the video tag.
+    </video>
+    <img src="poster.jpg" alt="Cashyum Poster" class="poster" />
+  </section>
+
+  <form id="registrationForm">
+    <label>Name:</label>
+    <input type="text" name="name" required />
+
+    <label>Register Number:</label>
+    <input type="text" name="regno" required />
+
+    <label>College Name:</label>
+    <input type="text" name="college" required />
+
+    <label>Year of Study:</label>
+    <select name="year" required>
+      <option value="">Select Year</option>
+      <option>1st Year</option>
+      <option>2nd Year</option>
+      <option>3rd Year</option>
+      <option>4th Year</option>
+    </select>
+
+    <label>Department:</label>
+    <input type="text" name="department" required />
+
+    <label>Fees Payment (GPay QR):</label>
+    <img src="gpay_qr.png" alt="GPay QR Code" class="qr" />
+
+    <label>Upload Screenshot of Payment:</label>
+    <input type="file" name="screenshot" accept="image/*" required />
+
+    <button type="submit">Submit Registration</button>
+    <div class="success" id="successMessage"></div>
+  </form>
+
+  <script>
+    fetch("https://script.google.com/macros/s/AKfycbwdK8b2RCJku2sCz8pxSuWzrvhO9irTC7RB9cvhVtOA/dev", {
+  method: "POST",
+  body: JSON.stringify(data),
+  headers: { "Content-Type": "application/json" }
+})
+    document.getElementById('registrationForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const formData = new FormData(e.target);
+        name: formData.get("name"),
+        regno: formData.get("regno"),
+        college: formData.get("college"),
+        year: formData.get("year"),
+        department: formData.get("department"),
+        screenshot: formData.get("screenshot")?.name || "Uploaded"
+      };
+
+      fetch("YOUR_WEB_APP_URL", {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: { "Content-Type": "application/json" }
+      })
+      .then(res => res.text())
+      .then(msg => {
+        document.getElementById('successMessage').textContent = "Registration submitted successfully!";
+      })
+      .catch(err => {
+        console.error(err);
+        alert("Submission failed.");
+      });
+    });
+  </script>
+</body>
+</html>
